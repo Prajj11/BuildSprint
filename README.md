@@ -1,4 +1,4 @@
-# SmartAgri AI - Production AI Decision Support Platform for Farmers
+# BuildSprint - SmartAgri AI
 
 SmartAgri AI translates multi-modal agricultural telemetry, computer vision leaf pathology, agronomic regression, Mandi wholesale price trends, and government schemes into actionable recommendations for farmers.
 
