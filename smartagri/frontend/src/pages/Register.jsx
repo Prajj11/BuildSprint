@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Sprout, UserPlus, AlertCircle } from 'lucide-react';
+import { Sprout, UserPlus, AlertCircle, ArrowRight } from 'lucide-react';
 import { AuthContext } from '../context/AuthContext';
 
 export default function Register() {
@@ -53,106 +53,107 @@ export default function Register() {
       justifyContent: 'center',
       padding: '2rem 1rem'
     }}>
-      <div className="glass-card" style={{ maxWidth: '650px', width: '100%', padding: '2.5rem' }}>
-        <div style={{ textAlign: 'center', marginBottom: '1.75rem' }}>
+      <div className="glass-card fade-in" style={{ maxWidth: '680px', width: '100%', padding: '2.5rem', borderRadius: '20px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <div style={{
             display: 'inline-flex',
-            background: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
+            background: 'linear-gradient(135deg, #10B981 0%, #047857 100%)',
             color: 'white',
-            padding: '0.75rem',
-            borderRadius: '14px',
-            marginBottom: '1rem'
+            padding: '0.85rem',
+            borderRadius: '16px',
+            marginBottom: '1rem',
+            boxShadow: '0 8px 20px rgba(16, 185, 129, 0.3)'
           }}>
-            <Sprout size={32} />
+            <Sprout size={36} />
           </div>
-          <h1 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#0f172a' }}>Register Farmer Account</h1>
-          <p style={{ fontSize: '0.875rem', color: '#64748b', marginTop: '0.3rem' }}>
+          <h1 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#0F172A', letterSpacing: '-0.5px' }}>Register Farmer Account</h1>
+          <p style={{ fontSize: '0.875rem', color: '#64748B', marginTop: '0.4rem' }}>
             Set up your farm profile for AI Decision Support
           </p>
         </div>
 
         {error && (
           <div style={{
-            background: '#fee2e2',
-            border: '1px solid #fca5a5',
-            color: '#b91c1c',
-            padding: '0.75rem 1rem',
-            borderRadius: '8px',
+            background: '#FEE2E2',
+            border: '1px solid #FCA5A5',
+            color: '#B91C1C',
+            padding: '0.85rem 1rem',
+            borderRadius: '10px',
             fontSize: '0.875rem',
             display: 'flex',
             alignItems: 'center',
             gap: '0.5rem',
-            marginBottom: '1.25rem'
+            marginBottom: '1.5rem'
           }}>
             <AlertCircle size={18} /> {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           <div className="grid-2">
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569' }}>Full Name *</label>
+              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569', marginBottom: '0.3rem', display: 'block' }}>Full Name *</label>
               <input type="text" name="farmer_name" required value={form.farmer_name} onChange={handleChange} className="input-field" placeholder="Ramesh Patil" />
             </div>
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569' }}>Email Address *</label>
+              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569', marginBottom: '0.3rem', display: 'block' }}>Email Address *</label>
               <input type="email" name="email" required value={form.email} onChange={handleChange} className="input-field" placeholder="farmer@smartagri.in" />
             </div>
           </div>
 
           <div className="grid-2">
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569' }}>Password * (Min 6 chars)</label>
+              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569', marginBottom: '0.3rem', display: 'block' }}>Password * (Min 6 chars)</label>
               <input type="password" name="password" required value={form.password} onChange={handleChange} className="input-field" placeholder="••••••••" />
             </div>
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569' }}>Primary Crop Commodity</label>
+              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569', marginBottom: '0.3rem', display: 'block' }}>Primary Crop Commodity</label>
               <input type="text" name="primary_crop" required value={form.primary_crop} onChange={handleChange} className="input-field" placeholder="Rice" />
             </div>
           </div>
 
           <div className="grid-3">
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569' }}>State *</label>
+              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569', marginBottom: '0.3rem', display: 'block' }}>State *</label>
               <input type="text" name="state" required value={form.state} onChange={handleChange} className="input-field" />
             </div>
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569' }}>District *</label>
+              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569', marginBottom: '0.3rem', display: 'block' }}>District *</label>
               <input type="text" name="district" required value={form.district} onChange={handleChange} className="input-field" />
             </div>
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569' }}>Land Size (Acres)</label>
+              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569', marginBottom: '0.3rem', display: 'block' }}>Land Size (Acres)</label>
               <input type="number" step="0.5" name="land_acres" required value={form.land_acres} onChange={handleChange} className="input-field" />
             </div>
           </div>
 
           <div className="grid-4">
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569' }}>Nitrogen (N)</label>
+              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569', marginBottom: '0.3rem', display: 'block' }}>Nitrogen (N)</label>
               <input type="number" name="N" value={form.N} onChange={handleChange} className="input-field" />
             </div>
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569' }}>Phosphorus (P)</label>
+              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569', marginBottom: '0.3rem', display: 'block' }}>Phosphorus (P)</label>
               <input type="number" name="P" value={form.P} onChange={handleChange} className="input-field" />
             </div>
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569' }}>Potassium (K)</label>
+              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569', marginBottom: '0.3rem', display: 'block' }}>Potassium (K)</label>
               <input type="number" name="K" value={form.K} onChange={handleChange} className="input-field" />
             </div>
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569' }}>Soil pH</label>
+              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569', marginBottom: '0.3rem', display: 'block' }}>Soil pH</label>
               <input type="number" step="0.1" name="ph" value={form.ph} onChange={handleChange} className="input-field" />
             </div>
           </div>
 
-          <button type="submit" disabled={loading} className="btn btn-primary" style={{ padding: '0.75rem', fontSize: '1rem', marginTop: '0.5rem' }}>
+          <button type="submit" disabled={loading} className="btn btn-primary" style={{ padding: '0.85rem', fontSize: '1rem', marginTop: '0.5rem' }}>
             <UserPlus size={20} /> {loading ? 'Creating Account...' : 'Register Account & Launch Dashboard'}
           </button>
         </form>
 
-        <div style={{ textAlign: 'center', marginTop: '1.5rem', borderTop: '1px solid #e2e8f0', pt: '1rem' }}>
-          <span style={{ fontSize: '0.875rem', color: '#64748b' }}>Already have an account? </span>
-          <Link to="/login" style={{ fontSize: '0.875rem', fontWeight: 700, color: '#059669' }}>
+        <div style={{ textAlign: 'center', marginTop: '1.75rem', borderTop: '1px solid #E2E8F0', paddingTop: '1.25rem' }}>
+          <span style={{ fontSize: '0.875rem', color: '#64748B' }}>Already registered? </span>
+          <Link to="/login" style={{ fontSize: '0.875rem', fontWeight: 800, color: '#10B981' }}>
             Log In Here
           </Link>
         </div>

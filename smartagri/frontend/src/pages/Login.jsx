@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Sprout, LogIn, Lock, Mail, AlertCircle } from 'lucide-react';
+import { Sprout, LogIn, Lock, Mail, AlertCircle, ArrowRight, ShieldCheck } from 'lucide-react';
 import { AuthContext } from '../context/AuthContext';
 
 export default function Login() {
@@ -32,42 +32,43 @@ export default function Login() {
 
   return (
     <div style={{
-      minHeight: '80vh',
+      minHeight: '82vh',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       padding: '2rem 1rem'
     }}>
-      <div className="glass-card" style={{ maxWidth: '440px', width: '100%', padding: '2.5rem' }}>
+      <div className="glass-card fade-in" style={{ maxWidth: '450px', width: '100%', padding: '2.5rem', borderRadius: '20px' }}>
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <div style={{
             display: 'inline-flex',
-            background: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
+            background: 'linear-gradient(135deg, #10B981 0%, #047857 100%)',
             color: 'white',
-            padding: '0.75rem',
-            borderRadius: '14px',
-            marginBottom: '1rem'
+            padding: '0.85rem',
+            borderRadius: '16px',
+            marginBottom: '1rem',
+            boxShadow: '0 8px 20px rgba(16, 185, 129, 0.3)'
           }}>
-            <Sprout size={32} />
+            <Sprout size={36} />
           </div>
-          <h1 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#0f172a' }}>Farmer Login</h1>
-          <p style={{ fontSize: '0.875rem', color: '#64748b', marginTop: '0.3rem' }}>
-            Access your SmartAgri AI Decision Support Account
+          <h1 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#0F172A', letterSpacing: '-0.5px' }}>Farmer Portal Login</h1>
+          <p style={{ fontSize: '0.875rem', color: '#64748B', marginTop: '0.4rem' }}>
+            Access SmartAgri AI Decision Support Platform
           </p>
         </div>
 
         {error && (
           <div style={{
-            background: '#fee2e2',
-            border: '1px solid #fca5a5',
-            color: '#b91c1c',
-            padding: '0.75rem 1rem',
-            borderRadius: '8px',
+            background: '#FEE2E2',
+            border: '1px solid #FCA5A5',
+            color: '#B91C1C',
+            padding: '0.85rem 1rem',
+            borderRadius: '10px',
             fontSize: '0.875rem',
             display: 'flex',
             alignItems: 'center',
             gap: '0.5rem',
-            marginBottom: '1.25rem'
+            marginBottom: '1.5rem'
           }}>
             <AlertCircle size={18} /> {error}
           </div>
@@ -75,7 +76,7 @@ export default function Login() {
 
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           <div>
-            <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569', marginBottom: '0.3rem', display: 'block' }}>
+            <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569', marginBottom: '0.4rem', display: 'block' }}>
               Email Address
             </label>
             <div style={{ position: 'relative' }}>
@@ -86,14 +87,14 @@ export default function Login() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="input-field"
-                style={{ paddingLeft: '2.5rem' }}
+                style={{ paddingLeft: '2.6rem' }}
               />
-              <Mail size={18} color="#94a3b8" style={{ position: 'absolute', left: '0.8rem', top: '50%', transform: 'translateY(-50%)' }} />
+              <Mail size={18} color="#94A3B8" style={{ position: 'absolute', left: '0.85rem', top: '50%', transform: 'translateY(-50%)' }} />
             </div>
           </div>
 
           <div>
-            <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569', marginBottom: '0.3rem', display: 'block' }}>
+            <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569', marginBottom: '0.4rem', display: 'block' }}>
               Password
             </label>
             <div style={{ position: 'relative' }}>
@@ -104,21 +105,21 @@ export default function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="input-field"
-                style={{ paddingLeft: '2.5rem' }}
+                style={{ paddingLeft: '2.6rem' }}
               />
-              <Lock size={18} color="#94a3b8" style={{ position: 'absolute', left: '0.8rem', top: '50%', transform: 'translateY(-50%)' }} />
+              <Lock size={18} color="#94A3B8" style={{ position: 'absolute', left: '0.85rem', top: '50%', transform: 'translateY(-50%)' }} />
             </div>
           </div>
 
-          <button type="submit" disabled={loading} className="btn btn-primary" style={{ padding: '0.75rem', fontSize: '1rem', marginTop: '0.5rem' }}>
-            <LogIn size={20} /> {loading ? 'Logging in...' : 'Log In to SmartAgri'}
+          <button type="submit" disabled={loading} className="btn btn-primary" style={{ padding: '0.85rem', fontSize: '1rem', marginTop: '0.5rem' }}>
+            <LogIn size={20} /> {loading ? 'Authenticating...' : 'Log In to SmartAgri'}
           </button>
         </form>
 
-        <div style={{ textAlign: 'center', marginTop: '1.75rem', borderTop: '1px solid #e2e8f0', pt: '1.25rem' }}>
-          <span style={{ fontSize: '0.875rem', color: '#64748b' }}>Don't have an account yet? </span>
-          <Link to="/register" style={{ fontSize: '0.875rem', fontWeight: 700, color: '#059669' }}>
-            Register New Account
+        <div style={{ textAlign: 'center', marginTop: '2rem', borderTop: '1px solid #E2E8F0', paddingTop: '1.25rem' }}>
+          <span style={{ fontSize: '0.875rem', color: '#64748B' }}>New to SmartAgri AI? </span>
+          <Link to="/register" style={{ fontSize: '0.875rem', fontWeight: 800, color: '#10B981' }}>
+            Register Account <ArrowRight size={14} style={{ display: 'inline' }} />
           </Link>
         </div>
       </div>
