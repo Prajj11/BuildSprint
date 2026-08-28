@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Bot, Send, User, Sparkles, RefreshCw, Cpu } from 'lucide-react';
 import { AuthContext } from '../context/AuthContext';
 import { api } from '../services/api';

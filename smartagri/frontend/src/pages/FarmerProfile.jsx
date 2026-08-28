@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { User, Save, MapPin, Navigation } from 'lucide-react';
+import { User, Save, MapPin, Navigation, Sparkles } from 'lucide-react';
 import { AuthContext } from '../context/AuthContext';
 import { api } from '../services/api';
 
@@ -40,9 +40,11 @@ export default function FarmerProfile() {
   if (!user) return null;
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', paddingBottom: '3rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', paddingBottom: '3rem' }} className="animate-fade-in">
       <div>
-        <span className="badge badge-primary">AUTHENTICATED USER PROFILE</span>
+        <span className="badge badge-primary">
+          <Sparkles size={12} /> AUTHENTICATED USER PROFILE
+        </span>
         <h1 style={{ fontSize: '1.75rem', fontWeight: 800, marginTop: '0.4rem', color: '#0f172a' }}>
           Farmer Account & Soil Test Defaults
         </h1>
@@ -55,16 +57,16 @@ export default function FarmerProfile() {
       <div className="glass-card" style={{ background: '#ecfdf5', border: '1px solid #a7f3d0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
           <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#047857', textTransform: 'uppercase' }}>GPS LOCATION TRACKING</span>
-          <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#0f172a', marginTop: '0.2rem' }}>
+          <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#0f172a', marginTop: '0.2rem' }}>
             {locationState.formattedAddress || `${user.district}, ${user.state}`}
           </h3>
-          <span style={{ fontSize: '0.8rem', color: '#047857' }}>
+          <span style={{ fontSize: '0.8rem', color: '#047857', fontWeight: 600 }}>
             Coordinates: {user.latitude || 19.99}°N, {user.longitude || 73.78}°E
           </span>
         </div>
 
         <button onClick={detectBrowserLocation} className="btn btn-primary" style={{ background: '#059669' }}>
-          <Navigation size={18} /> Update Current Location via GPS
+          <Navigation size={18} /> Update Location via GPS
         </button>
       </div>
 
@@ -73,56 +75,56 @@ export default function FarmerProfile() {
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           <div className="grid-2">
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569' }}>Account Email</label>
+              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '0.35rem' }}>Account Email</label>
               <input type="email" disabled value={user.email} className="input-field" style={{ background: '#f1f5f9', cursor: 'not-allowed' }} />
             </div>
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569' }}>Farmer Full Name</label>
+              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '0.35rem' }}>Farmer Full Name</label>
               <input type="text" name="farmer_name" value={form.farmer_name || ''} onChange={handleChange} className="input-field" required />
             </div>
           </div>
 
           <div className="grid-3">
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569' }}>State Jurisdiction</label>
+              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '0.35rem' }}>State Jurisdiction</label>
               <input type="text" name="state" value={form.state || ''} onChange={handleChange} className="input-field" required />
             </div>
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569' }}>District</label>
+              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '0.35rem' }}>District</label>
               <input type="text" name="district" value={form.district || ''} onChange={handleChange} className="input-field" required />
             </div>
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569' }}>Primary Crop Commodity</label>
+              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '0.35rem' }}>Primary Crop Commodity</label>
               <input type="text" name="primary_crop" value={form.primary_crop || ''} onChange={handleChange} className="input-field" required />
             </div>
           </div>
 
           <div className="grid-2">
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569' }}>Land Size (Acres)</label>
+              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '0.35rem' }}>Land Size (Acres)</label>
               <input type="number" step="0.5" name="land_acres" value={form.land_acres || 5.0} onChange={handleChange} className="input-field" required />
             </div>
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569' }}>Soil Classification</label>
+              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '0.35rem' }}>Soil Classification</label>
               <input type="text" name="soil_type" value={form.soil_type || ''} onChange={handleChange} className="input-field" required />
             </div>
           </div>
 
           <div className="grid-4">
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569' }}>Nitrogen (N)</label>
+              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '0.35rem' }}>Nitrogen (N)</label>
               <input type="number" name="N" value={form.N || 90} onChange={handleChange} className="input-field" required />
             </div>
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569' }}>Phosphorus (P)</label>
+              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '0.35rem' }}>Phosphorus (P)</label>
               <input type="number" name="P" value={form.P || 42} onChange={handleChange} className="input-field" required />
             </div>
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569' }}>Potassium (K)</label>
+              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '0.35rem' }}>Potassium (K)</label>
               <input type="number" name="K" value={form.K || 43} onChange={handleChange} className="input-field" required />
             </div>
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569' }}>Soil pH</label>
+              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569', display: 'block', marginBottom: '0.35rem' }}>Soil pH</label>
               <input type="number" step="0.1" name="ph" value={form.ph || 6.5} onChange={handleChange} className="input-field" required />
             </div>
           </div>
@@ -132,7 +134,7 @@ export default function FarmerProfile() {
               <Save size={18} /> {loading ? 'Saving Profile...' : 'Save Profile Changes'}
             </button>
             {savedSuccess && (
-              <span style={{ fontSize: '0.85rem', color: '#059669', fontWeight: 700 }}>
+              <span style={{ fontSize: '0.85rem', color: '#059669', fontWeight: 800 }}>
                 Account profile updated successfully! ✨
               </span>
             )}

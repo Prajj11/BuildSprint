@@ -28,16 +28,23 @@ export default function App() {
 
   return (
     <AuthProvider>
-      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: '#f8fafc' }}>
+      <div className="app-bg-wrapper" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
         <Navbar 
           onOpenMobileDrawer={() => setIsMobileDrawerOpen(true)}
           onOpenActionPlan={() => setIsActionPlanOpen(true)}
         />
 
-        <div style={{ display: 'flex', flex: 1 }}>
+        <div style={{ display: 'flex', flex: 1, position: 'relative', zIndex: 1 }}>
           <Sidebar />
 
-          <main style={{ flex: 1, padding: '1.5rem 2rem', maxWidth: '1400px', margin: '0 auto', width: '100%' }}>
+          <main style={{
+            flex: 1,
+            padding: '1.75rem 2rem 5rem 2rem',
+            maxWidth: '1440px',
+            margin: '0 auto',
+            width: '100%',
+            boxSizing: 'border-box'
+          }}>
             <Routes>
               {/* Public Routes */}
               <Route path="/" element={<LandingPage />} />

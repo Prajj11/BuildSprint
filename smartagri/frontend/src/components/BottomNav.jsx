@@ -17,17 +17,23 @@ export default function BottomNav() {
   ];
 
   return (
-    <nav style={{
-      position: 'fixed',
-      bottom: 0, left: 0, right: 0,
-      height: '60px',
-      background: 'white',
-      borderTop: '1px solid #e2e8f0',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-around',
-      zIndex: 90
-    }}>
+    <nav 
+      className="mobile-bottom-nav"
+      style={{
+        position: 'fixed',
+        bottom: 0, left: 0, right: 0,
+        height: '64px',
+        background: 'rgba(255, 255, 255, 0.9)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        borderTop: '1px solid rgba(226, 232, 240, 0.8)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        zIndex: 90,
+        boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.05)'
+      }}
+    >
       {items.map(item => {
         const Icon = item.icon;
         return (
@@ -38,13 +44,30 @@ export default function BottomNav() {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              fontSize: '0.7rem',
+              gap: '0.2rem',
+              fontSize: '0.725rem',
               fontWeight: isActive ? 700 : 500,
-              color: isActive ? '#059669' : '#64748b'
+              color: isActive ? '#059669' : '#64748b',
+              padding: '0.3rem 0.6rem',
+              borderRadius: '10px',
+              transition: 'all 0.2s ease'
             })}
           >
-            <Icon size={20} />
-            <span>{item.label}</span>
+            {({ isActive }) => (
+              <>
+                <div style={{
+                  padding: '0.2rem 0.6rem',
+                  borderRadius: '12px',
+                  background: isActive ? '#d1fae5' : 'transparent',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <Icon size={18} color={isActive ? '#059669' : '#64748b'} />
+                </div>
+                <span>{item.label}</span>
+              </>
+            )}
           </NavLink>
         );
       })}
