@@ -47,13 +47,14 @@ export default function Register() {
 
   return (
     <div style={{
-      minHeight: '85vh',
+      minHeight: '80vh',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: '2rem 1rem'
+      padding: '1rem 0',
+      width: '100%'
     }}>
-      <div className="glass-card fade-in" style={{ maxWidth: '680px', width: '100%', padding: '2.5rem', borderRadius: '20px' }}>
+      <div className="glass-card fade-in" style={{ maxWidth: '680px', width: '100%', padding: '1.5rem', borderRadius: '20px', minWidth: 0 }}>
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <div style={{
             display: 'inline-flex',

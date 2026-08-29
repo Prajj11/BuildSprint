@@ -37,10 +37,47 @@ def seed_database():
     tables = [
         "crop_recommendations", "mandi_prices", "yield_records",
         "government_schemes", "imd_rainfall_baselines", "icar_advisories",
-        "district_crop_stats"
+        "district_crop_stats", "disease_remedies"
     ]
     for tbl in tables:
         cursor.execute(f"DROP TABLE IF EXISTS {tbl}")
+
+    # Create disease_remedies table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS disease_remedies (
+            class_id TEXT PRIMARY KEY,
+            crop TEXT,
+            condition TEXT,
+            status TEXT,
+            severity TEXT DEFAULT 'Moderate',
+            pathogen TEXT DEFAULT 'Fungal / Bacterial',
+            symptoms TEXT,
+            immediate_action TEXT,
+            organic_treatment TEXT,
+            chemical_treatment TEXT,
+            prevention TEXT DEFAULT 'Maintain proper plant spacing and rotation.'
+        );
+    """)
+
+    # Populate disease_remedies table
+    from app.core.disease_taxonomy import DISEASE_TAXONOMY
+    for class_id, info in DISEASE_TAXONOMY.items():
+        cursor.execute("""
+            INSERT OR REPLACE INTO disease_remedies (class_id, crop, condition, status, severity, pathogen, symptoms, immediate_action, organic_treatment, chemical_treatment, prevention)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            class_id,
+            info.get("crop", "Unknown"),
+            info.get("disease", "Unknown"),
+            info.get("status", "Unknown"),
+            info.get("severity", "Moderate"),
+            info.get("pathogen", "Fungal / Bacterial"),
+            info.get("symptoms", ""),
+            info.get("immediate_actions", ""),
+            info.get("organic_treatment", ""),
+            info.get("chemical_treatment", ""),
+            info.get("prevention", "Maintain proper plant spacing and crop rotation.")
+        ))
 
     # 1. crop_recommendations
     df_crop = pd.read_csv(RAW_DATA_DIR / "crop_recommendation.csv")

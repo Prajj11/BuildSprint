@@ -34,16 +34,17 @@ export default function App() {
           onOpenActionPlan={() => setIsActionPlanOpen(true)}
         />
 
-        <div style={{ display: 'flex', flex: 1, position: 'relative', zIndex: 1 }}>
+        <div style={{ display: 'flex', flex: 1, position: 'relative', zIndex: 1, marginTop: '64px' }}>
           <Sidebar />
 
-          <main style={{
+          <main className="app-main-content" style={{
             flex: 1,
             padding: '1.75rem 2rem 5rem 2rem',
             maxWidth: '1440px',
             margin: '0 auto',
             width: '100%',
-            boxSizing: 'border-box'
+            boxSizing: 'border-box',
+            minWidth: 0
           }}>
             <Routes>
               {/* Public Routes */}

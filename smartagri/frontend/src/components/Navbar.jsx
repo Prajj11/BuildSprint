@@ -18,66 +18,62 @@ export default function Navbar({ onOpenMobileDrawer, onOpenActionPlan }) {
 
   return (
     <header style={{
-      height: '70px',
+      height: '64px',
       background: 'rgba(255, 255, 255, 0.95)',
       backdropFilter: 'blur(12px)',
       borderBottom: '1px solid #E2E8F0',
-      position: 'sticky',
+      position: 'fixed',
       top: 0,
+      left: 0,
+      right: 0,
       zIndex: 100,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
-      padding: '0 1.75rem',
+      padding: '0 1.25rem',
       boxShadow: '0 1px 3px rgba(11, 31, 23, 0.05)'
     }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: 0 }}>
         {user && (
           <button 
             onClick={onOpenMobileDrawer} 
             className="btn btn-outline"
-            style={{ padding: '0.45rem', borderRadius: '8px', display: 'none' }}
+            style={{ padding: '0.45rem', borderRadius: '8px', display: 'none', minHeight: '38px', minWidth: '38px' }}
             id="mobile-menu-btn"
+            aria-label="Open Mobile Menu"
           >
             <Menu size={20} />
           </button>
         )}
 
-        <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+        <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', minWidth: 0, overflow: 'hidden' }}>
           <div style={{
             background: 'linear-gradient(135deg, #10B981 0%, #047857 100%)',
             color: 'white',
-            padding: '0.55rem',
-            borderRadius: '12px',
+            padding: '0.45rem',
+            borderRadius: '10px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)'
+            boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)',
+            flexShrink: 0
           }}>
-            <Sprout size={24} />
+            <Sprout size={20} />
           </div>
-          <div>
-            <span style={{ fontSize: '1.3rem', fontWeight: 800, color: '#0F172A', letterSpacing: '-0.5px' }}>
+          <div style={{ minWidth: 0, overflow: 'hidden' }}>
+            <span style={{ fontSize: '1.15rem', fontWeight: 800, color: '#0F172A', letterSpacing: '-0.5px', whiteSpace: 'nowrap' }}>
               SmartAgri <span style={{ color: '#10B981' }}>AI</span>
             </span>
-            <span style={{ display: 'block', fontSize: '0.7rem', color: '#64748B', fontWeight: 700, letterSpacing: '0.02em' }}>
-              AGRITECH DECISION PLATFORM
+            <span style={{ display: 'block', fontSize: '0.625rem', color: '#64748B', fontWeight: 700, letterSpacing: '0.02em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              AGRITECH PLATFORM
             </span>
           </div>
         </Link>
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'nowrap', flexShrink: 0 }}>
         {user ? (
           <>
-            <button 
-              onClick={onOpenActionPlan}
-              className="btn btn-primary"
-              style={{ fontSize: '0.85rem', padding: '0.5rem 1rem' }}
-            >
-              <ShieldCheck size={17} /> 8-Point Plan
-            </button>
-
             {/* GPS Location Pill */}
             <div 
               onClick={detectBrowserLocation} 
@@ -85,20 +81,24 @@ export default function Navbar({ onOpenMobileDrawer, onOpenActionPlan }) {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.45rem',
+                gap: '0.35rem',
                 background: locationState.isGpsActive ? '#D1FAE5' : '#F1F5F9',
                 border: locationState.isGpsActive ? '1px solid #10B981' : '1px solid #CBD5E1',
-                padding: '0.45rem 0.9rem',
+                padding: '0.35rem 0.65rem',
                 borderRadius: '20px',
-                fontSize: '0.85rem',
+                fontSize: '0.775rem',
                 fontWeight: 700,
                 color: locationState.isGpsActive ? '#047857' : '#334155',
                 cursor: 'pointer',
-                transition: 'all 0.2s ease'
+                transition: 'all 0.2s ease',
+                maxWidth: '160px',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis'
               }}
             >
-              <Navigation size={15} color={locationState.isGpsActive ? '#10B981' : '#0284C7'} />
-              <span>{locationState.formattedAddress || `${user.district}, ${user.state}`}</span>
+              <Navigation size={13} color={locationState.isGpsActive ? '#10B981' : '#0284C7'} style={{ flexShrink: 0 }} />
+              <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{locationState.formattedAddress || `${user.district}, ${user.state}`}</span>
             </div>
 
             {/* User Dropdown */}
@@ -108,19 +108,21 @@ export default function Navbar({ onOpenMobileDrawer, onOpenActionPlan }) {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '0.5rem',
+                  gap: '0.35rem',
                   background: '#F8FAF8',
                   border: '1px solid #E2E8F0',
-                  padding: '0.45rem 0.85rem',
+                  padding: '0.35rem 0.6rem',
                   borderRadius: '20px',
                   cursor: 'pointer'
                 }}
               >
-                <div style={{ background: '#10B981', color: 'white', width: '28px', height: '28px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: '0.85rem' }}>
+                <div style={{ background: '#10B981', color: 'white', width: '26px', height: '26px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: '0.8rem', flexShrink: 0 }}>
                   {user.farmer_name ? user.farmer_name.charAt(0) : 'F'}
                 </div>
-                <span style={{ fontSize: '0.875rem', fontWeight: 700, color: '#0F172A' }}>{user.farmer_name}</span>
-                <ChevronDown size={15} color="#64748B" />
+                <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#0F172A', maxWidth: '80px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {user.farmer_name}
+                </span>
+                <ChevronDown size={14} color="#64748B" style={{ flexShrink: 0 }} />
               </div>
 
               {dropdownOpen && (
@@ -128,7 +130,7 @@ export default function Navbar({ onOpenMobileDrawer, onOpenActionPlan }) {
                   style={{
                     position: 'absolute',
                     top: '120%', right: 0,
-                    width: '200px',
+                    width: '190px',
                     background: 'white',
                     border: '1px solid #E2E8F0',
                     borderRadius: '12px',
@@ -158,11 +160,11 @@ export default function Navbar({ onOpenMobileDrawer, onOpenActionPlan }) {
             </div>
           </>
         ) : (
-          <div style={{ display: 'flex', gap: '0.6rem' }}>
-            <Link to="/login" className="btn btn-outline" style={{ fontSize: '0.85rem', padding: '0.5rem 1rem' }}>
-              <LogIn size={16} /> Log In
+          <div style={{ display: 'flex', gap: '0.4rem' }}>
+            <Link to="/login" className="btn btn-outline" style={{ fontSize: '0.8rem', padding: '0.4rem 0.75rem', minHeight: '36px' }}>
+              <LogIn size={15} /> Log In
             </Link>
-            <Link to="/register" className="btn btn-primary" style={{ fontSize: '0.85rem', padding: '0.5rem 1rem' }}>
+            <Link to="/register" className="btn btn-primary" style={{ fontSize: '0.8rem', padding: '0.4rem 0.75rem', minHeight: '36px' }}>
               Register
             </Link>
           </div>

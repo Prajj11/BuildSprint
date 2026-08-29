@@ -118,7 +118,22 @@ def test_market_where_to_sell_ranked():
     assert res.status_code == 200
     assert len(res.json()["ranked_mandis"]) > 0
 
-# 7. Government Schemes Tests
+# 7. Dashboard Endpoints Batch Test
+def test_dashboard_batch_endpoints_success():
+    headers = get_auth_headers()
+    res_weather = client.get("/api/weather/advisory", headers=headers)
+    res_crop = client.post("/api/crop-recommendation/predict", json={
+        "N": 90, "P": 42, "K": 43, "temperature": 25.0, "humidity": 80.0, "ph": 6.5, "rainfall": 200.0
+    })
+    res_yield = client.post("/api/yield-prediction/predict", json={
+        "crop": "Rice", "state": "Maharashtra", "season": "Kharif", "area_acres": 5.0, "fertilizer_kg_ha": 120.0, "rainfall_mm": 900.0
+    })
+    res_market = client.get("/api/market/trends?commodity=Rice&state=Maharashtra")
+
+    assert res_weather.status_code == 200
+    assert res_crop.status_code == 200
+    assert res_yield.status_code == 200
+    assert res_market.status_code == 200
 def test_schemes_search_all():
     res = client.get("/api/schemes/search?category=All")
     assert res.status_code == 200

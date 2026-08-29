@@ -52,16 +52,16 @@ export default function ActionPlanModal({ isOpen, onClose }) {
           </div>
         ) : planData ? (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }} className="animate-scale-in">
-            <div className="grid-2">
+            <div className="grid-2" style={{ width: '100%' }}>
               {Object.entries(planData.action_plan_8_points).map(([key, item]) => (
-                <div key={key} style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '14px', padding: '1.1rem', boxShadow: 'var(--card-shadow-sm)' }}>
+                <div key={key} style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '14px', padding: '1.1rem', boxShadow: 'var(--card-shadow-sm)', minWidth: 0, overflowWrap: 'break-word' }}>
                   <h4 style={{ fontSize: '0.95rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.4rem' }}>
                     {item.title}
                   </h4>
-                  <p style={{ fontSize: '0.85rem', color: '#334155', lineHeight: 1.5 }}>
+                  <p style={{ fontSize: '0.85rem', color: '#334155', lineHeight: 1.5, overflowWrap: 'break-word' }}>
                     {item.recommendation || item.spraying_window || item.predicted_yield || item.target_mandi || item.recommended_scheme || item.overall_risk_score}
                   </p>
-                  <span style={{ fontSize: '0.75rem', color: '#64748b', display: 'block', marginTop: '0.35rem', fontWeight: 600 }}>
+                  <span style={{ fontSize: '0.75rem', color: '#64748b', display: 'block', marginTop: '0.35rem', fontWeight: 600, overflowWrap: 'break-word' }}>
                     {item.rationale || item.action || item.temperature_alert || item.preventative_action || item.total_estimated_harvest || item.net_realization || item.mitigation_plan}
                   </span>
                 </div>

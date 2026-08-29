@@ -32,9 +32,9 @@ export default function ModelEvaluationInfo() {
 
       {/* Model Summary Cards */}
       {summary && (
-        <div className="grid-3">
+        <div className="grid-3" style={{ width: '100%' }}>
           {summary.models.map((m, idx) => (
-            <div key={idx} className="glass-card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <div key={idx} className="glass-card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minWidth: 0 }}>
               <div>
                 <span className="badge badge-secondary" style={{ marginBottom: '0.5rem' }}>{m.algorithm}</span>
                 <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#0F172A', margin: '0.4rem 0' }}>{m.name}</h3>
@@ -50,13 +50,13 @@ export default function ModelEvaluationInfo() {
 
       {/* Datasets Provenance Registry Table */}
       {registry && (
-        <div className="glass-card">
+        <div className="glass-card" style={{ minWidth: 0 }}>
           <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#0F172A', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <Database color="#10B981" size={22} /> Ingested Data Registry (18 Datasets)
           </h3>
 
-          <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.875rem' }}>
+          <div className="table-responsive">
+            <table style={{ width: '100%', minWidth: '600px', borderCollapse: 'collapse', fontSize: '0.875rem' }}>
               <thead>
                 <tr style={{ background: '#F8FAF8', borderBottom: '2px solid #E2E8F0', textAlign: 'left' }}>
                   <th style={{ padding: '0.85rem' }}>Key</th>

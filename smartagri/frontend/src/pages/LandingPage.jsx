@@ -12,13 +12,14 @@ export default function LandingPage() {
       <section style={{
         background: 'linear-gradient(135deg, #064e3b 0%, #047857 50%, #0f172a 100%)',
         color: 'white',
-        borderRadius: '28px',
-        padding: '4.5rem 2rem',
-        marginTop: '1rem',
+        borderRadius: '24px',
+        padding: '2.5rem 1.25rem',
+        marginTop: '0.5rem',
         boxShadow: '0 25px 50px -12px rgba(5, 150, 105, 0.25)',
         textAlign: 'center',
         position: 'relative',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        width: '100%'
       }}>
         <div style={{
           position: 'absolute',
@@ -29,30 +30,30 @@ export default function LandingPage() {
           pointerEvents: 'none'
         }} />
 
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(255, 255, 255, 0.12)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255, 255, 255, 0.2)', padding: '0.45rem 1.15rem', borderRadius: '30px', fontSize: '0.85rem', fontWeight: 700, marginBottom: '1.75rem' }}>
-          <ShieldCheck size={16} color="#34d399" /> Production AI Decision Support Platform for Farmers
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(255, 255, 255, 0.12)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255, 255, 255, 0.2)', padding: '0.35rem 0.85rem', borderRadius: '30px', fontSize: '0.775rem', fontWeight: 700, marginBottom: '1.25rem', maxWidth: '100%', overflowWrap: 'break-word' }}>
+          <ShieldCheck size={16} color="#34d399" style={{ flexShrink: 0 }} /> <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>Production AI Decision Platform</span>
         </div>
 
-        <h1 style={{ fontSize: '3rem', fontWeight: 800, lineHeight: 1.2, marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>
-          Empowering Indian Agriculture with <br/>
+        <h1 style={{ fontSize: 'clamp(1.75rem, 5vw, 3rem)', fontWeight: 800, lineHeight: 1.25, marginBottom: '1rem', letterSpacing: '-0.02em' }}>
+          Empowering Agriculture with <br/>
           <span style={{ color: '#34d399' }}>Multi-Modal AI & Telemetry</span>
         </h1>
 
-        <p style={{ fontSize: '1.1rem', maxWidth: '750px', margin: '0 auto 2.25rem auto', color: '#e2e8f0', lineHeight: 1.65 }}>
+        <p style={{ fontSize: '0.95rem', maxWidth: '750px', margin: '0 auto 1.75rem auto', color: '#e2e8f0', lineHeight: 1.6 }}>
           SmartAgri AI integrates 18 agronomic datasets, PyTorch ResNet-38 Vision pathology, live Open-Meteo telemetry, and 57,000+ Agmarknet Mandi market records into actionable farmer advisories.
         </p>
 
-        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap', width: '100%' }}>
           {user ? (
-            <Link to="/dashboard" className="btn" style={{ background: '#34d399', color: '#064e3b', padding: '0.85rem 2rem', fontSize: '1rem', fontWeight: 800, borderRadius: '12px', boxShadow: '0 4px 15px rgba(52, 211, 153, 0.3)' }}>
-              Go to Farmer Dashboard <ArrowRight size={20} />
+            <Link to="/dashboard" className="btn" style={{ background: '#34d399', color: '#064e3b', padding: '0.75rem 1.5rem', fontSize: '0.95rem', fontWeight: 800, borderRadius: '12px', boxShadow: '0 4px 15px rgba(52, 211, 153, 0.3)', width: '100%', maxWidth: '300px', justifyContent: 'center' }}>
+              Go to Farmer Dashboard <ArrowRight size={18} />
             </Link>
           ) : (
             <>
-              <Link to="/register" className="btn" style={{ background: '#34d399', color: '#064e3b', padding: '0.85rem 2rem', fontSize: '1rem', fontWeight: 800, borderRadius: '12px', boxShadow: '0 4px 15px rgba(52, 211, 153, 0.3)' }}>
-                Get Started & Register <ArrowRight size={20} />
+              <Link to="/register" className="btn" style={{ background: '#34d399', color: '#064e3b', padding: '0.75rem 1.5rem', fontSize: '0.95rem', fontWeight: 800, borderRadius: '12px', boxShadow: '0 4px 15px rgba(52, 211, 153, 0.3)', width: '100%', maxWidth: '300px', justifyContent: 'center' }}>
+                Get Started & Register <ArrowRight size={18} />
               </Link>
-              <Link to="/login" className="btn btn-outline" style={{ color: 'white', borderColor: 'rgba(255,255,255,0.3)', padding: '0.85rem 2rem', fontSize: '1rem', borderRadius: '12px', background: 'rgba(255,255,255,0.05)' }}>
+              <Link to="/login" className="btn btn-outline" style={{ color: 'white', borderColor: 'rgba(255,255,255,0.3)', padding: '0.75rem 1.5rem', fontSize: '0.95rem', borderRadius: '12px', background: 'rgba(255,255,255,0.05)', width: '100%', maxWidth: '300px', justifyContent: 'center' }}>
                 Farmer Log In
               </Link>
             </>
@@ -69,8 +70,8 @@ export default function LandingPage() {
           Designed for high precision agronomic guidance, pathogen diagnosis, and price optimization.
         </p>
 
-        <div className="grid-3">
-          <div className="glass-card glass-card-interactive">
+        <div className="grid-3" style={{ width: '100%' }}>
+          <div className="glass-card glass-card-interactive" style={{ minWidth: 0 }}>
             <div style={{ background: '#d1fae5', color: '#047857', width: '52px', height: '52px', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
               <Sprout size={28} />
             </div>
@@ -80,7 +81,7 @@ export default function LandingPage() {
             </p>
           </div>
 
-          <div className="glass-card glass-card-interactive">
+          <div className="glass-card glass-card-interactive" style={{ minWidth: 0 }}>
             <div style={{ background: '#e0f2fe', color: '#0284c7', width: '52px', height: '52px', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
               <Scan size={28} />
             </div>
@@ -90,7 +91,7 @@ export default function LandingPage() {
             </p>
           </div>
 
-          <div className="glass-card glass-card-interactive">
+          <div className="glass-card glass-card-interactive" style={{ minWidth: 0 }}>
             <div style={{ background: '#fef3c7', color: '#d97706', width: '52px', height: '52px', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
               <Landmark size={28} />
             </div>

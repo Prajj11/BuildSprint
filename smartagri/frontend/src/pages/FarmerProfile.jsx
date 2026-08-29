@@ -71,7 +71,7 @@ export default function FarmerProfile() {
       </div>
 
       {/* Profile Form */}
-      <div className="glass-card">
+      <div className="glass-card" style={{ minWidth: 0 }}>
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           <div className="grid-2">
             <div>

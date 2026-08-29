@@ -73,9 +73,9 @@ export default function MarketIntelligence() {
 
       {/* Price Analytics Cards & Chart */}
       {trends && (
-        <div className="grid-3">
-          <div className="glass-card" style={{ gridColumn: 'span 2' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+        <div className="grid-3" style={{ width: '100%' }}>
+          <div className="glass-card" style={{ gridColumn: 'span 2', minWidth: 0 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
               <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0F172A' }}>
                 Wholesale Price Time-Series ({trends.commodity} - {trends.state})
               </h3>
@@ -94,7 +94,7 @@ export default function MarketIntelligence() {
             </div>
           </div>
 
-          <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', justifyContent: 'center' }}>
+          <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', justifyContent: 'center', minWidth: 0 }}>
             <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0F172A' }}>Market Realization Analytics</h3>
             <div style={{ background: '#F8FAF8', padding: '0.85rem 1rem', borderRadius: '12px', border: '1px solid #E2E8F0' }}>
               <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>AVERAGE MODAL PRICE</span>
@@ -114,16 +114,16 @@ export default function MarketIntelligence() {
 
       {/* Where to Sell Smart Ranker Table */}
       {whereToSell && (
-        <div className="glass-card">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+        <div className="glass-card" style={{ minWidth: 0 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.5rem' }}>
             <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#0F172A', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <Award color="#10B981" size={22} /> "Where Should I Sell?" Smart Mandi Ranker
             </h3>
             <span className="badge badge-secondary">Ranked by Highest Realization</span>
           </div>
 
-          <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.875rem' }}>
+          <div className="table-responsive">
+            <table style={{ width: '100%', minWidth: '600px', borderCollapse: 'collapse', fontSize: '0.875rem' }}>
               <thead>
                 <tr style={{ background: '#F8FAF8', borderBottom: '2px solid #E2E8F0', textAlign: 'left' }}>
                   <th style={{ padding: '0.85rem' }}>Rank</th>

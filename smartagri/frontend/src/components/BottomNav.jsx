@@ -22,8 +22,9 @@ export default function BottomNav() {
       style={{
         position: 'fixed',
         bottom: 0, left: 0, right: 0,
-        height: '64px',
-        background: 'rgba(255, 255, 255, 0.9)',
+        height: '60px',
+        paddingBottom: 'env(safe-area-inset-bottom, 0px)',
+        background: 'rgba(255, 255, 255, 0.95)',
         backdropFilter: 'blur(16px)',
         WebkitBackdropFilter: 'blur(16px)',
         borderTop: '1px solid rgba(226, 232, 240, 0.8)',
@@ -44,28 +45,31 @@ export default function BottomNav() {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              gap: '0.2rem',
-              fontSize: '0.725rem',
+              justifyContent: 'center',
+              gap: '0.15rem',
+              fontSize: '0.675rem',
               fontWeight: isActive ? 700 : 500,
               color: isActive ? '#059669' : '#64748b',
-              padding: '0.3rem 0.6rem',
-              borderRadius: '10px',
-              transition: 'all 0.2s ease'
+              padding: '0.2rem 0.4rem',
+              borderRadius: '8px',
+              transition: 'all 0.2s ease',
+              flex: 1,
+              textAlign: 'center'
             })}
           >
             {({ isActive }) => (
               <>
                 <div style={{
-                  padding: '0.2rem 0.6rem',
+                  padding: '0.15rem 0.5rem',
                   borderRadius: '12px',
                   background: isActive ? '#d1fae5' : 'transparent',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center'
                 }}>
-                  <Icon size={18} color={isActive ? '#059669' : '#64748b'} />
+                  <Icon size={17} color={isActive ? '#059669' : '#64748b'} />
                 </div>
-                <span>{item.label}</span>
+                <span style={{ whiteSpace: 'nowrap' }}>{item.label}</span>
               </>
             )}
           </NavLink>

@@ -20,7 +20,6 @@ export default function Sidebar() {
     { label: 'Market Intelligence', path: '/market-intelligence', icon: Landmark },
     { label: 'Government Schemes', path: '/government-schemes', icon: FileText },
     { label: 'AI Farmer Assistant', path: '/ai-assistant', icon: Bot },
-    { label: 'Model Provenance', path: '/model-evaluation', icon: Info },
     { label: 'Farmer Profile', path: '/profile', icon: User },
   ];
 
@@ -31,43 +30,22 @@ export default function Sidebar() {
         width: '280px',
         background: '#041711',
         color: 'white',
-        position: 'sticky',
-        top: '70px',
-        height: 'calc(100vh - 70px)',
+        position: 'fixed',
+        top: '64px',
+        left: 0,
+        bottom: 0,
+        height: 'calc(100vh - 64px)',
         overflowY: 'auto',
         padding: '1.25rem 1rem 1.5rem 1rem',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
         borderRight: '1px solid rgba(255, 255, 255, 0.05)',
+        zIndex: 80,
         flexShrink: 0
       }}
     >
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-        {/* Top Header / Branding */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', paddingBottom: '1rem', borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
-          <div style={{
-            background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
-            color: 'white',
-            padding: '0.55rem',
-            borderRadius: '12px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxShadow: '0 4px 14px rgba(16, 185, 129, 0.3)'
-          }}>
-            <Sprout size={24} />
-          </div>
-          <div>
-            <div style={{ fontSize: '1.2rem', fontWeight: 800, letterSpacing: '-0.02em', display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
-              SmartAgri <span style={{ color: '#10B981' }}>AI</span>
-            </div>
-            <div style={{ fontSize: '0.7rem', color: '#94A3B8', fontWeight: 500 }}>
-              AI Decisions. Better Farming.
-            </div>
-          </div>
-        </div>
-
         {/* Category Header */}
         <div>
           <div style={{

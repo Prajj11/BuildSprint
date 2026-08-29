@@ -66,17 +66,17 @@ export default function DiseaseDetection() {
         </p>
       </div>
 
-      <div className="grid-2">
+      <div className="grid-2" style={{ width: '100%' }}>
         {/* Leaf Scan Interface */}
-        <div className="glass-card">
+        <div className="glass-card" style={{ minWidth: 0 }}>
           <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0F172A', marginBottom: '1rem' }}>Leaf Image Acquisition</h3>
           
-          <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.25rem' }}>
-            <button onClick={() => setIsCameraOpen(true)} className="btn btn-primary" style={{ flex: 1, padding: '0.85rem' }}>
-              <Camera size={20} /> Open Live Camera
+          <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '1.25rem', flexWrap: 'wrap' }}>
+            <button onClick={() => setIsCameraOpen(true)} className="btn btn-primary" style={{ flex: '1 1 140px', padding: '0.75rem 0.5rem', justifyContent: 'center' }}>
+              <Camera size={18} /> Live Camera
             </button>
-            <label className="btn btn-outline" style={{ flex: 1, padding: '0.85rem', cursor: 'pointer', textAlign: 'center' }}>
-              <Upload size={20} /> Upload Leaf File
+            <label className="btn btn-outline" style={{ flex: '1 1 140px', padding: '0.75rem 0.5rem', cursor: 'pointer', textAlign: 'center', justifyContent: 'center' }}>
+              <Upload size={18} /> Upload Leaf
               <input type="file" accept="image/*" onChange={handleFileChange} style={{ display: 'none' }} />
             </label>
           </div>
@@ -97,23 +97,25 @@ export default function DiseaseDetection() {
             <h4 style={{ fontSize: '0.85rem', fontWeight: 700, color: '#475569', marginBottom: '0.75rem' }}>
               Test Sample Leaf Images (Click to Scan)
             </h4>
-            <div style={{ display: 'flex', gap: '0.65rem', overflowX: 'auto', paddingBottom: '0.5rem' }}>
+            <div className="horizontal-scroll-container">
               {samples.map((s, idx) => (
                 <div 
                   key={idx} 
                   onClick={() => handleSampleClick(s.filename)}
                   style={{
                     minWidth: '95px',
+                    width: '95px',
                     height: '95px',
                     borderRadius: '10px',
                     overflow: 'hidden',
                     cursor: 'pointer',
                     border: '2px solid #E2E8F0',
-                    position: 'relative'
+                    position: 'relative',
+                    flexShrink: 0
                   }}
                 >
                   <img src={s.url} alt={s.filename} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  <span style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(11, 31, 23, 0.8)', color: 'white', fontSize: '0.65rem', textAlign: 'center', padding: '2px 0', fontWeight: 700 }}>
+                  <span style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(11, 31, 23, 0.8)', color: 'white', fontSize: '0.65rem', textAlign: 'center', padding: '2px 0', fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                     {s.filename.split('_')[0]}
                   </span>
                 </div>

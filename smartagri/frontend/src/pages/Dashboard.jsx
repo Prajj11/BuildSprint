@@ -26,7 +26,7 @@ export default function Dashboard() {
     const lon = locationState.longitude || user.longitude;
     const locName = locationState.formattedAddress || `${user.district}, ${user.state}`;
 
-    Promise.all([
+    Promise.allSettled([
       api.getWeatherAdvisory(lat, lon, locName, user.primary_crop || "Rice"),
       api.predictCrop({
         N: user.N || 90, P: user.P || 42, K: user.K || 43,
@@ -42,10 +42,14 @@ export default function Dashboard() {
       }),
       api.getMarketTrends(user.primary_crop || "Rice", user.state || "Maharashtra")
     ]).then(([w, c, y, m]) => {
-      setWeather(w);
-      setCropRec(c);
-      setYieldData(y);
-      setMarketData(m);
+      if (w.status === 'fulfilled') setWeather(w.value);
+      if (c.status === 'fulfilled') setCropRec(c.value);
+      if (y.status === 'fulfilled') setYieldData(y.value);
+      if (m.status === 'fulfilled') setMarketData(m.value);
+
+      if (w.status === 'rejected' && c.status === 'rejected' && y.status === 'rejected' && m.status === 'rejected') {
+        setError("Failed to fetch real-time telemetry from platform services.");
+      }
     }).catch(err => {
       console.error(err);
       setError("Failed to fetch real-time telemetry from platform services.");
@@ -58,13 +62,13 @@ export default function Dashboard() {
   return (
     <div className="fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', paddingBottom: '3rem' }}>
       {/* Welcome Banner */}
-      <div className="glass-card" style={{ background: 'linear-gradient(135deg, #0B1F17 0%, #143325 100%)', color: 'white', border: '1px solid rgba(16, 185, 129, 0.2)' }}>
+      <div className="glass-card" style={{ background: 'linear-gradient(135deg, #0B1F17 0%, #143325 100%)', color: 'white', border: '1px solid rgba(16, 185, 129, 0.2)', minWidth: 0 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-          <div>
+          <div style={{ minWidth: 0 }}>
             <span className="badge badge-dark" style={{ border: '1px solid #10B981', marginBottom: '0.4rem' }}>
               <Sparkles size={12} color="#10B981" /> REAL-TIME AGRONOMIC TELEMETRY
             </span>
-            <h1 style={{ fontSize: '1.8rem', fontWeight: 800, color: 'white', marginTop: '0.2rem', letterSpacing: '-0.5px' }}>
+            <h1 style={{ fontSize: '1.8rem', fontWeight: 800, color: 'white', marginTop: '0.2rem', letterSpacing: '-0.5px', overflowWrap: 'break-word' }}>
               Welcome back, {user.farmer_name} 👋
             </h1>
             <p style={{ fontSize: '0.9rem', color: '#94A3B8', marginTop: '0.25rem' }}>
@@ -72,15 +76,15 @@ export default function Dashboard() {
             </p>
           </div>
 
-          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', width: '100%', maxWidth: '100%' }}>
             <button 
               onClick={detectBrowserLocation} 
               className="btn btn-outline" 
-              style={{ fontSize: '0.85rem', background: 'rgba(255,255,255,0.08)', borderColor: 'rgba(255,255,255,0.2)', color: 'white' }}
+              style={{ fontSize: '0.85rem', background: 'rgba(255,255,255,0.08)', borderColor: 'rgba(255,255,255,0.2)', color: 'white', flex: '1 1 auto', justifyContent: 'center' }}
             >
               <Navigation size={16} color="#10B981" /> Detect GPS Location
             </button>
-            <Link to="/ai-assistant" className="btn btn-primary" style={{ fontSize: '0.875rem' }}>
+            <Link to="/ai-assistant" className="btn btn-primary" style={{ fontSize: '0.875rem', flex: '1 1 auto', justifyContent: 'center' }}>
               <Bot size={17} /> Ask AI Assistant
             </Link>
           </div>
@@ -149,10 +153,10 @@ export default function Dashboard() {
       </div>
 
       {/* Middle Grid */}
-      <div className="grid-2">
+      <div className="grid-2" style={{ width: '100%' }}>
         {/* Open-Meteo Weather Chart */}
-        <div className="glass-card">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+        <div className="glass-card" style={{ minWidth: 0 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
             <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0F172A' }}>7-Day Weather & Rainfall Telemetry</h3>
             <span className="badge badge-secondary">{weather?.location || user.district}</span>
           </div>
@@ -178,8 +182,8 @@ export default function Dashboard() {
         </div>
 
         {/* Mandi Price Realization */}
-        <div className="glass-card">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+        <div className="glass-card" style={{ minWidth: 0 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
             <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0F172A' }}>{user.primary_crop || "Rice"} Mandi Price Realization</h3>
             <Link to="/market-intelligence" style={{ fontSize: '0.85rem', color: '#10B981', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
               Rank All Mandis <ArrowRight size={15} />

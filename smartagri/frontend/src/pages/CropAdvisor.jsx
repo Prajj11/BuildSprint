@@ -60,9 +60,9 @@ export default function CropAdvisor() {
         </p>
       </div>
 
-      <div className="grid-2">
+      <div className="grid-2" style={{ width: '100%' }}>
         {/* Input Form */}
-        <div className="glass-card">
+        <div className="glass-card" style={{ minWidth: 0 }}>
           <h3 style={{ fontSize: '1.1rem', fontWeight: 800, marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.6rem', color: '#0f172a' }}>
             <div style={{ background: '#d1fae5', padding: '0.4rem', borderRadius: '10px', color: '#059669', display: 'flex' }}>
               <Sprout size={18} />
@@ -120,7 +120,7 @@ export default function CropAdvisor() {
         </div>
 
         {/* Prediction Results */}
-        <div className="glass-card">
+        <div className="glass-card" style={{ minWidth: 0 }}>
           {loading ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', padding: '1rem' }}>
               <div className="skeleton" style={{ height: '90px', borderRadius: '16px' }} />

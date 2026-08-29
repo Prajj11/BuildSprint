@@ -103,7 +103,7 @@ export default function WeatherAdvisory() {
       )}
 
       {/* Interactive Scenario Simulator */}
-      <div className="glass-card">
+      <div className="glass-card" style={{ minWidth: 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem' }}>
           <div style={{ background: '#d1fae5', padding: '0.4rem', borderRadius: '10px', color: '#059669', display: 'flex' }}>
             <Sliders size={20} />
@@ -111,8 +111,8 @@ export default function WeatherAdvisory() {
           <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0f172a' }}>Real-Time Interactive Stress Scenario Simulator</h3>
         </div>
 
-        <div className="grid-2" style={{ marginBottom: '1.5rem' }}>
-          <div>
+        <div className="grid-2" style={{ marginBottom: '1.5rem', width: '100%' }}>
+          <div style={{ minWidth: 0 }}>
             <label style={{ fontSize: '0.85rem', fontWeight: 700, color: '#334155', display: 'block', marginBottom: '0.35rem' }}>
               Temperature Anomaly Offset: <strong style={{ color: '#059669' }}>{tempOffset > 0 ? `+${tempOffset}` : tempOffset}°C</strong>
             </label>
@@ -124,7 +124,7 @@ export default function WeatherAdvisory() {
             />
           </div>
 
-          <div>
+          <div style={{ minWidth: 0 }}>
             <label style={{ fontSize: '0.85rem', fontWeight: 700, color: '#334155', display: 'block', marginBottom: '0.35rem' }}>
               Monsoon Surge Multiplier: <strong style={{ color: '#0284c7' }}>{rainMultiplier}x</strong>
             </label>
@@ -138,20 +138,20 @@ export default function WeatherAdvisory() {
         </div>
 
         {scenario && (
-          <div className="grid-4" style={{ marginBottom: '1.5rem' }}>
-            <div style={{ background: 'white', padding: '1rem', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: 'var(--card-shadow-sm)' }}>
+          <div className="grid-4" style={{ marginBottom: '1.5rem', width: '100%' }}>
+            <div style={{ background: 'white', padding: '1rem', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: 'var(--card-shadow-sm)', minWidth: 0 }}>
               <span style={{ fontSize: '0.725rem', fontWeight: 800, color: '#64748b', textTransform: 'uppercase' }}>EMA PREDICTED TEMP</span>
               <h4 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#059669', marginTop: '0.1rem' }}>{scenario.metrics.ema_predicted_temp_c}°C</h4>
             </div>
-            <div style={{ background: 'white', padding: '1rem', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: 'var(--card-shadow-sm)' }}>
+            <div style={{ background: 'white', padding: '1rem', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: 'var(--card-shadow-sm)', minWidth: 0 }}>
               <span style={{ fontSize: '0.725rem', fontWeight: 800, color: '#64748b', textTransform: 'uppercase' }}>SIMULATED RAIN</span>
               <h4 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#0284c7', marginTop: '0.1rem' }}>{scenario.metrics.seven_day_cumulative_rain_mm} mm</h4>
             </div>
-            <div style={{ background: 'white', padding: '1rem', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: 'var(--card-shadow-sm)' }}>
+            <div style={{ background: 'white', padding: '1rem', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: 'var(--card-shadow-sm)', minWidth: 0 }}>
               <span style={{ fontSize: '0.725rem', fontWeight: 800, color: '#64748b', textTransform: 'uppercase' }}>EVAPOTRANSPIRATION DEFICIT</span>
               <h4 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#d97706', marginTop: '0.1rem' }}>{scenario.metrics.evapotranspiration_deficit_mm} mm/day</h4>
             </div>
-            <div style={{ background: 'white', padding: '1rem', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: 'var(--card-shadow-sm)' }}>
+            <div style={{ background: 'white', padding: '1rem', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: 'var(--card-shadow-sm)', minWidth: 0 }}>
               <span style={{ fontSize: '0.725rem', fontWeight: 800, color: '#64748b', textTransform: 'uppercase' }}>SIMULATED FUNGAL RISK</span>
               <h4 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#e11d48', marginTop: '0.1rem' }}>{scenario.metrics.fungal_risk_level}</h4>
             </div>

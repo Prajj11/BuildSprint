@@ -28,10 +28,16 @@
   --radius-full: 9999px;
 }
 
-* {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -45,6 +51,50 @@ body {
   color: var(--text-main);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img, video, iframe, svg, canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ensure flex/grid children can shrink without forcing overflow */
+.grid-2, .grid-3, .grid-4, .flex-row, .glass-card, div, main, form {
+  min-width: 0;
+}
+
+/* Responsive Table Scroll Wrapper */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 1rem;
+}
+
+/* Horizontal Scroll Container Utility for Galleries & Chips */
+.horizontal-scroll-container {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.5rem;
+  width: 100%;
+  max-width: 100%;
+  scrollbar-width: thin;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar {
+  height: 6px;
+}
+.horizontal-scroll-container::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
 }
 
 a {
@@ -280,17 +330,47 @@ a {
   .mobile-bottom-nav {
     display: none !important;
   }
+  .app-main-content {
+    margin-left: 280px !important;
+  }
 }
 
 @media (max-width: 1024px) {
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .grid-3 { grid-template-columns: repeat(2, 1fr); }
   .desktop-sidebar { display: none !important; }
+  #mobile-menu-btn { display: inline-flex !important; }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  .app-main-content {
+    padding: 1rem 1rem 5.5rem 1rem !important;
+  }
   .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
-  .modal-content { padding: 1.25rem; }
+  .modal-content { 
+    padding: 1.25rem; 
+    width: 92%; 
+    max-height: 85vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-main-content {
+    padding: 0.85rem 0.85rem 5.5rem 0.85rem !important;
+  }
+  .glass-card {
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+  }
+  .btn {
+    padding: 0.55rem 0.9rem;
+    font-size: 0.85rem;
+    min-height: 42px; /* Touch target optimization */
+  }
+  .input-field, select, textarea {
+    min-height: 42px;
+    font-size: 0.9rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

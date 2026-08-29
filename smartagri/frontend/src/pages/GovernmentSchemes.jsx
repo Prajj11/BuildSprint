@@ -105,9 +105,9 @@ export default function GovernmentSchemes() {
 
       {/* Scheme Cards Grid */}
       {loading ? (
-        <div className="grid-2">
+        <div className="grid-2" style={{ width: '100%' }}>
           {[1,2,3,4].map(i => (
-            <div key={i} className="glass-card">
+            <div key={i} className="glass-card" style={{ minWidth: 0 }}>
               <div className="skeleton" style={{ height: '20px', width: '40%', marginBottom: '0.75rem' }} />
               <div className="skeleton" style={{ height: '28px', width: '80%', marginBottom: '0.5rem' }} />
               <div className="skeleton" style={{ height: '60px', width: '100%' }} />
@@ -115,23 +115,23 @@ export default function GovernmentSchemes() {
           ))}
         </div>
       ) : (
-        <div className="grid-2">
+        <div className="grid-2" style={{ width: '100%' }}>
           {(activeTab === 'matched' ? matched : schemes).map((s, idx) => (
-            <div key={idx} className="glass-card glass-card-interactive" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '1rem' }}>
+            <div key={idx} className="glass-card glass-card-interactive" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '1rem', minWidth: 0 }}>
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.4rem' }}>
                   <span className="badge badge-primary">{s.category}</span>
                   {s.match_score && <span className="badge badge-secondary">{s.match_score}</span>}
                 </div>
-                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.5rem' }}>
+                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.5rem', overflowWrap: 'break-word' }}>
                   {s.scheme_name}
                 </h3>
-                <p style={{ fontSize: '0.875rem', color: '#475569', lineHeight: 1.6 }}>
+                <p style={{ fontSize: '0.875rem', color: '#475569', lineHeight: 1.6, overflowWrap: 'break-word' }}>
                   {s.benefits_summary}
                 </p>
               </div>
 
-              <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '0.85rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '0.85rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
                 <span style={{ fontSize: '0.775rem', color: '#64748b', fontWeight: 600 }}>
                   Eligible: {s.eligible_states}
                 </span>
