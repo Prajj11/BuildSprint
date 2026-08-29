@@ -1,3 +1,4 @@
+import sqlite3
 from PIL import Image
 import io
 import torch
@@ -6,13 +7,41 @@ from torchvision import transforms
 import numpy as np
 
 from app.services.pytorch_disease_model import get_pytorch_model, get_spatial_model
-from app.core.disease_taxonomy import DISEASE_TAXONOMY, DEFAULT_LOW_CONFIDENCE_SAFEGUARD
+from app.core.config import DB_PATH
+from app.core.disease_taxonomy import DEFAULT_LOW_CONFIDENCE_SAFEGUARD
 
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor(),
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 ])
+
+def get_remedy_from_db(class_id: str) -> dict:
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT class_id, crop, condition, status, severity, pathogen, symptoms, immediate_action, organic_treatment, chemical_treatment, prevention
+        FROM disease_remedies
+        WHERE class_id = ?
+    """, (class_id,))
+    row = cursor.fetchone()
+    conn.close()
+
+    if row:
+        return {
+            "class_id": row[0],
+            "crop": row[1],
+            "condition": row[2],
+            "status": row[3],
+            "severity": row[4],
+            "pathogen": row[5],
+            "symptoms": row[6],
+            "immediate_actions": row[7],
+            "organic_treatment": row[8],
+            "chemical_treatment": row[9],
+            "prevention": row[10]
+        }
+    return None
 
 def extract_spatial_color_moments(img: Image.Image):
     # Multi-Scale Spatial Color Moments feature extractor
@@ -60,26 +89,37 @@ def diagnose_leaf_image(image_bytes: bytes, filename: str = "leaf_scan.jpg"):
         res["confidence_percentage"] = f"{confidence_pct}%"
         return res
 
-    tax_info = DISEASE_TAXONOMY.get(predicted_class_name, {
-        "crop": predicted_class_name.split("___")[0] if "___" in predicted_class_name else "Plant",
-        "disease": predicted_class_name.split("___")[1].replace("_", " ") if "___" in predicted_class_name else "Infection",
-        "status": "Diseased" if "healthy" not in predicted_class_name.lower() else "Healthy",
+    remedy = get_remedy_from_db(predicted_class_name)
+    if remedy:
+        return {
+            "condition": f"{remedy['crop']} - {remedy['condition']}",
+            "crop": remedy['crop'],
+            "disease": remedy['condition'],
+            "status": remedy['status'],
+            "confidence_percentage": f"{confidence_pct}%",
+            "confidence_tier": "High Confidence" if confidence >= 0.85 else "Moderate Confidence",
+            "is_low_confidence": False,
+            "symptoms": remedy['symptoms'],
+            "organic_treatment": remedy['organic_treatment'],
+            "chemical_treatment": remedy['chemical_treatment'],
+            "immediate_actions": remedy['immediate_actions']
+        }
+
+    # Fallback if class not directly in DB
+    crop_name = predicted_class_name.split("___")[0] if "___" in predicted_class_name else "Plant"
+    disease_name = predicted_class_name.split("___")[1].replace("_", " ") if "___" in predicted_class_name else "Infection"
+    status_str = "Healthy" if "healthy" in predicted_class_name.lower() else "Diseased"
+
+    return {
+        "condition": f"{crop_name} {disease_name}",
+        "crop": crop_name,
+        "disease": disease_name,
+        "status": status_str,
+        "confidence_percentage": f"{confidence_pct}%",
+        "confidence_tier": "High Confidence" if confidence >= 0.85 else "Moderate Confidence",
+        "is_low_confidence": False,
         "symptoms": "Leaf spots and pathological discoloration.",
         "organic_treatment": "Apply Neem oil emulsion (5ml/L) or Trichoderma bio-fungicide.",
         "chemical_treatment": "Apply Mancozeb 75 WP (2g/L) or Copper Oxychloride.",
         "immediate_actions": "Isolate affected leaves and maintain crop hygiene."
-    })
-
-    return {
-        "condition": f"{tax_info['crop']} {tax_info['disease']}",
-        "crop": tax_info['crop'],
-        "disease": tax_info['disease'],
-        "status": tax_info['status'],
-        "confidence_percentage": f"{confidence_pct}%",
-        "confidence_tier": "High Confidence" if confidence >= 0.85 else "Moderate Confidence",
-        "is_low_confidence": False,
-        "symptoms": tax_info['symptoms'],
-        "organic_treatment": tax_info['organic_treatment'],
-        "chemical_treatment": tax_info['chemical_treatment'],
-        "immediate_actions": tax_info['immediate_actions']
     }

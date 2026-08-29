@@ -4,11 +4,12 @@ from torchvision import models, transforms
 from PIL import Image, ImageDraw
 import joblib
 import numpy as np
+import sqlite3
 from pathlib import Path
 import sys
 
 sys.path.append(str(Path(__file__).resolve().parent.parent))
-from app.core.config import MODELS_DIR, SAMPLES_DIR
+from app.core.config import MODELS_DIR, SAMPLES_DIR, DB_PATH
 from app.core.disease_taxonomy import DISEASE_TAXONOMY
 
 # Custom PyTorch ResNet-38 Vision CNN Architecture wrapper
@@ -32,8 +33,16 @@ class ResNet38VisionModel(nn.Module):
 
 def setup_disease_models_and_samples():
     print("Setting up PyTorch ResNet-38 and Spatial Color Moments Models...")
-    num_classes = len(DISEASE_TAXONOMY)
-    classes = list(DISEASE_TAXONOMY.keys())
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute("SELECT class_id FROM disease_remedies ORDER BY class_id ASC")
+    classes = [r[0] for r in cursor.fetchall()]
+    conn.close()
+
+    if not classes:
+        classes = list(DISEASE_TAXONOMY.keys())
+
+    num_classes = len(classes)
     
     model = ResNet38VisionModel(num_classes=num_classes)
     model.eval()
